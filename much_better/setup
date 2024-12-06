@@ -1,0 +1,8 @@
+set up wirtual evnironment
+    python -m venv env
+
+activate evnironment
+    (command prompt in C:\projects\pyton\fastapi\much_better) .\env\Scripts\activate
+
+app start
+    uvicorn main:app --reload
