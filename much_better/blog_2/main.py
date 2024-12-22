@@ -20,8 +20,8 @@ def get_db():
 
 
 @app.post('/blog', status_code=status.HTTP_201_CREATED, description='Create blog', tags=['Blogs'])
-def create(request: schemas.Blog, db: Session = Depends(get_db)):
-    new_blog = models.Blog(title=request.title, body=request.body)
+def create(request: schemas.BlogBase, db: Session = Depends(get_db)):
+    new_blog = models.Blog(title=request.title, body=request.body, user_id=2)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -61,7 +61,7 @@ def delete_blog(id: int, db: Session = Depends(get_db)):
 
 
 @app.put('/blog/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['Blogs'])
-def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
+def update_blog(id: int, request: schemas.BlogBase, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
 
     if not blog:
