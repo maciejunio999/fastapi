@@ -25,6 +25,10 @@ class User(BaseModel):
         orm_mode = True
 
 
+class UserInDB(User):
+    hashed_password: str
+
+
 class UpdateUser(BaseModel):
     username: str
     email: str
@@ -63,4 +67,4 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    email: str | None = None
